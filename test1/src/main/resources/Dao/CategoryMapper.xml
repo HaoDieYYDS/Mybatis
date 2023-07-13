@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="Dao.CategoryMapper">
+    <select id="selectById" resultMap="CategoryMap" parameterType="int">
+        select *,p.id pid
+        from category c,product p
+        where c.id = p.typeid and c.id = #{id}
+    </select>
+    <resultMap id="CategoryMap" type="pojo.Category">
+        <id property="id" column="id"></id>
+        <result property="typename" column="typename"></result>
+        <collection property="list" javaType="java.util.List"  ofType="pojo.Product">
+            <id property="id" column="pid"></id>
+            <result property="goodsname" column="goodsname"></result>
+            <result property="price" column="price"></result>
+            <result property="typeid" column="typeid"></result>
+        </collection>
+    </resultMap>
+</mapper>

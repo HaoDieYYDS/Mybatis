@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="Dao.EmployeeMapper">
+    <select id="selectById" parameterType="int" resultType="pojo.Employee">
+        select * from employee where id = #{id}
+    </select>
+
+    <update id="update" parameterType="pojo.Employee">
+        update employee set name = #{name},age = #{age},position = #{position} where id = #{id}
+    </update>
+    <insert id="insert" parameterType="pojo.Employee">
+        insert into employee(id,name,age,position)values (NULL,#{name},#{age},#{position})
+    </insert>
+    <delete id="delete" parameterType="int">
+        delete from employee where id = #{id}
+    </delete>
+
+    <select id="selectByItem" resultType="pojo.Employee">
+        select * from employee
+        <where>
+            <choose>
+                <when test="name != null and name !=''">
+                    and name like concat('%',#{name},'%')
+                </when>
+                <when test="age != null and age !=''">
+                    and age = #{age}
+                </when>
+                <otherwise>
+                    and id is not null
+                </otherwise>
+            </choose>
+        </where>
+
+    </select>
+</mapper>
