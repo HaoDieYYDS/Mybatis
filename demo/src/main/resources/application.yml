@@ -1,0 +1,30 @@
+spring:
+  datasource:
+    username: root
+    password: 111111
+    url: jdbc:mysql://127.0.0.1:3306/mybatis?useSSL=false&serverTimezone=UTC&characterEncoding=utf8&useUnicode=true&useSSL=false
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
+
+  servlet:
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 10MB
+      enabled: true
+
+mybatis:
+  mapper-locations: classpath:dao/*.xml
+  type-aliases-package: com.example.demo.pojo
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl #sql语句打印
+
+server:
+  port: 8088
+
+
+
+
+
+

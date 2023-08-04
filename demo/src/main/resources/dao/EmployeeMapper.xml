@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.dao.EmployeeMapper">
+    <select id="findById" parameterType="int" resultType="com.example.demo.pojo.Employee">
+        select * from employee where id = #{id}
+    </select>
+
+    <select id="all" resultType="Employee">
+        select * from employee
+    </select>
+
+    <update id="update" parameterType="Employee">
+        update employee
+    <set>
+        <if test="name != null and name != ''">
+            name = #{name},
+        </if>
+
+        <if test="age != null and age != ''">
+            age = #{age},
+        </if>
+
+        <if test="position != null and position != ''">
+            position = #{position}
+        </if>
+    </set>
+        where id = #{id}
+    </update>
+
+    <delete id="delete" parameterType="int">
+        delete from employee where id = #{id}
+    </delete>
+
+    <insert id="insert">
+        insert into employee(id,name,age,position,pic) values (NULL,#{name},#{age},#{position},#{pic})
+    </insert>
+
+
+    <select id="findByName"  resultType="com.example.demo.pojo.Employee">
+        select * from employee where name like '%${value}%'
+    </select>
+
+</mapper>
